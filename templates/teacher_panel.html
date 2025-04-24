@@ -1,0 +1,485 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Panel</title>
+    <!-- Bootstrap CSS -->
+    <!-- Latest compiled and minified CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+      body{
+        background-image: url("{% static 'teacher-background.jpg' %}");
+        background-size: cover;
+      }
+      .snip1143 {
+        text-align: center;
+        text-transform: uppercase;
+        font-weight: 500;
+      }
+      .snip1143 * {
+        box-sizing: border-box;
+        -webkit-transition: all 0.35s ease;
+        transition: all 0.35s ease;
+      }
+      .snip1143 li {
+        display: inline-block;
+        list-style: outside none none;
+        margin: 0 1.5em;
+        overflow: hidden;
+      }
+      .snip1143 a {
+        padding: 0.3em 0;
+        color: rgba(255, 255, 255, 0.5);
+        position: relative;
+        display: inline-block;
+        letter-spacing: 1px;
+        margin: 0;
+        text-decoration: none;
+      }
+      .snip1143 a:before,
+      .snip1143 a:after {
+        position: absolute;
+        -webkit-transition: all 0.35s ease;
+        transition: all 0.35s ease;
+      }
+      .snip1143 a:before {
+        top: 100%;
+        display: block;
+        height: 3px;
+        width: 100%;
+        content: "";
+        background-color: #c0392b;
+      }
+      .snip1143 a:after {
+        padding: 0.3em 0;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        content: attr(data-hover);
+        color: white;
+        white-space: nowrap;
+      }
+      .snip1143 li:hover a,
+      .snip1143 .current a {
+        transform: translateY(-100%);
+      }
+
+      /* CARD */
+      :root {
+        --surface-color: #fff;
+        --curve: 40;
+        }
+
+        * {
+        box-sizing: border-box;
+        }
+
+        body {
+        font-family: 'Noto Sans JP', sans-serif;
+        background-color: #fef8f8;
+        }
+
+        .cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        margin: 4rem 5vw;
+        padding: 0;
+        list-style-type: none;
+        }
+
+        .card {
+        position: relative;
+        display: block;
+        height: 100%;  
+        border-radius: calc(var(--curve) * 1px);
+        overflow: hidden;
+        text-decoration: none;
+        }
+
+        .card__image {      
+        width: 100%;
+        height: auto;
+        }
+
+        .card__overlay {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 1;      
+        border-radius: calc(var(--curve) * 1px);    
+        background-color: var(--surface-color);      
+        transform: translateY(100%);
+        transition: .2s ease-in-out;
+        }
+
+        .card:hover .card__overlay {
+        transform: translateY(0);
+        }
+
+        .card__header {
+        position: relative;
+        display: flex;
+        align-items: center;
+        gap: 2em;
+        padding: 1em;
+        border-radius: calc(var(--curve) * 1px) 0 0 0;    
+        background-color: var(--surface-color);
+        transform: translateY(-100%);
+        transition: .2s ease-in-out;
+        }
+
+        .card__arc {
+        width: 80px;
+        height: 80px;
+        position: absolute;
+        bottom: 100%;
+        right: 0;      
+        z-index: 1;
+        }
+
+        .card__arc path {
+        fill: var(--surface-color);
+        d: path("M 40 80 c 22 0 40 -22 40 -40 v 40 Z");
+        }       
+
+        .card:hover .card__header {
+        transform: translateY(0);
+        }
+
+        .card__thumb {
+        flex-shrink: 0;
+        width: 50px;
+        height: 50px;      
+        border-radius: 50%;      
+        }
+
+        .card__title {
+        font-size: 1em;
+        margin: 0 0 .3em;
+        color: #6A515E;
+        }
+
+        .card__tagline {
+        display: block;
+        margin: 1em 0;
+        font-family: "MockFlowFont";  
+        font-size: .8em; 
+        color: #D7BDCA;  
+        }
+
+        .card__status {
+        font-size: .8em;
+        color: #D7BDCA;
+        }
+
+        .card__description {
+        padding: 0 2em 2em;
+        margin: 0;
+        color: #D7BDCA;
+        font-family: "MockFlowFont";   
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 3;
+        overflow: hidden;
+        }    
+
+
+        .dashboard-cards {
+          position: relative;
+          padding-bottom: 50px;
+          margin: 0 !important;
+        }
+
+        .dashboard-cards .card {
+          background: #ffffff;
+          display: inline-block;
+          perspective: 1000;
+          z-index: 20;
+          padding: 0 !important;
+          margin: 5px 5px 10px 5px;
+          position: relative;
+          text-align: left;
+          transition: all 0.3s 0s ease-in;
+          z-index: 1;
+          width: calc(33.33333333% - 10px);
+          cursor: pointer;
+          transition: all 0.3s ease;
+        }
+
+        .dashboard-cards .card:hover {
+          box-shadow: 0 15px 10px -10px rgba(31, 31, 31, 0.5);
+          transition: all 0.3s ease;
+        }
+
+        .dashboard-cards .card .card-title {
+          background: #ffffff;
+          padding: 20px 15px;
+          position: relative;
+          z-index: 0;
+        }
+
+        .dashboard-cards .card .card-title h2 {
+          font-size: 24px;
+          letter-spacing: -0.05em;
+          margin: 0;
+          padding: 0;
+        }
+
+        .dashboard-cards .card .card-title h2 small {
+          display: block;
+          font-size: 14px;
+          margin-top: 8px;
+          letter-spacing: -0.025em;
+        }
+
+        .dashboard-cards .card .card-description {
+          position: relative;
+          font-size: 14px;
+          border-top: 1px solid #ddd;
+          padding: 10px 15px 0 15px;
+        }
+
+        .dashboard-cards .card .card-actions {
+          box-shadow: 0 2px 0px 0 rgba(0, 0, 0, 0.075);
+          padding: 10px;
+          text-align: center;
+        }
+
+        .dashboard-cards .card .card-flap {
+          background: #d9d9d9;
+          position: absolute;
+          width: 100%;
+          transform-origin: top;
+          transform: rotateX(-90deg);
+        }
+
+        .dashboard-cards .card .flap1 {
+          transition: all 0.3s 0.3s ease-out;
+          z-index: -1;
+        }
+
+        .dashboard-cards .card .flap2 {
+          transition: all 0.3s 0s ease-out;
+          z-index: -2;
+        }
+
+        .dashboard-cards.showing .card {
+          cursor: pointer;
+          opacity: 0.6;
+          transform: scale(0.88);
+        }
+
+        .dashboard-cards .no-touch .dashboard-cards.showing .card:hover {
+          opacity: 0.94;
+          transform: scale(0.92);
+        }
+
+        .dashboard-cards .card.d-card-show {
+          opacity: 1 !important;
+          transform: scale(1) !important;
+        }
+
+        .dashboard-cards .card.d-card-show .card-flap {
+          background: #ffffff;
+          transform: rotateX(0deg);
+        }
+
+        .dashboard-cards .card.d-card-show .flap1 {
+          transition: all 0.3s 0s ease-out;
+        }
+
+        .dashboard-cards .card.d-card-show .flap2 {
+          transition: all 0.3s 0.2s ease-out;
+        }
+
+        .dashboard-cards .card .task-count {
+          width: 40px;
+          height: 40px;
+          position: absolute;
+          top: 22px;
+          right: 10px;
+          background: #ecf0f1;
+          text-align: center;
+          line-height: 40px;
+          border-radius: 100%;
+          color: #333333;
+          font-weight: 600;
+          transition: all 0.2s ease;
+        }
+
+        .dashboard-cards .task-list {
+          padding: 0 !important;
+        }
+
+        .dashboard-cards .task-list li {
+          padding: 10px 0;
+          padding-left: 10px;
+          margin: 3px 0;
+          list-style-type: none;
+          border-bottom: 1px solid #e9ebed;
+          border-left: 3px solid #f36525;
+          transition: all 0.2s ease;
+        }
+
+        .dashboard-cards .task-list li:hover {
+          background: #ecf0f1;
+          transition: all 0.2s ease;
+        }
+
+        .dashboard-cards .task-list li span {
+          float: right;
+          color: #f36525;
+          margin-right: 5px;
+        }
+
+        .dashboard-cards.showing .card.d-card-show .task-count {
+          color: #ffffff;
+          background: #f36525;
+          transition: all 0.2s ease;
+        }
+
+        .dashboard-cards .card-actions .btn {
+          color: #333;
+        }
+
+        .dashboard-cards .card-actions .btn:hover {
+          color: #f36525;
+        }
+
+        .header {
+          text-align: center;
+
+          &__title {
+            margin: 0;
+            text-transform: uppercase;
+            font-size: 2.5em;
+            font-weight: 500;
+            line-height: 1.1;
+
+          }
+          &__subtitle {
+            margin: 0;
+            font-size: 1.5em;
+            color: $gray;
+            font-family: 'Yesteryear', cursive;
+            font-weight: 500;
+            line-height: 1.1;
+          }
+        }
+    </style>
+
+</head>
+<body>
+    <ul class="snip1143">
+      <li class="current"><a href="#" data-hover="{{teacher.name}} - Panel">{{teacher.name}} - Panel</a></li>
+      <li><a href="/logout/" data-hover="Logout">Logout</a></li>
+      <!-- <li><a href="#" data-hover="Contact">Contact</a></li> -->
+    </ul>
+
+    <div class="container">
+        <div class = "row">
+            <ul class="cards">
+                <li>
+                  <a href="/add_student/" class="card">
+                    <img src="https://www.thestatesman.com/wp-content/uploads/2020/09/QT-Indian-students-2.jpg" class="card__image" alt="" />
+                    <div class="card__overlay">
+                      <div class="card__header">
+                        <svg class="card__arc" xmlns="http://www.w3.org/2000/svg"><path /></svg>                     
+                        <img class="card__thumb" src="https://i.imgur.com/7D7I6dI.png" alt="" />
+                        <div class="card__header-text">
+                          <h3 class="card__title">Add Student</h3>            
+                          <span class="card__status">1 hour ago</span>
+                        </div>
+                      </div>
+                      <p class="card__description">Click 'Add Student' to seamlessly enroll new learners into your learning management system</p>
+                    </div>
+                  </a>      
+                </li>
+                <li>
+                  <a href="/add_parent/" class="card">
+                    <img src="https://www.verywellfamily.com/thmb/S2mY8IrN5KEqn35SYmWokbrUPLI=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/iStock-691524194-5c2f38cfeaab47eab4d17fbcd8e8d13c.jpg" class="card__image" alt="" />
+                    <div class="card__overlay">        
+                      <div class="card__header">
+                        <svg class="card__arc" xmlns="http://www.w3.org/2000/svg"><path /></svg>                 
+                        <img class="card__thumb" src="https://i.imgur.com/sjLMNDM.png" alt="" />
+                        <div class="card__header-text">
+                          <h3 class="card__title">Add Parent</h3>
+                          <span class="card__status">3 hours ago</span>
+                        </div>
+                      </div>
+                      <p class="card__description">Tap 'Add Parent' to connect and engage guardians in the educational journey of their students</p>
+                    </div>
+                  </a>
+                </li>
+                <li>
+                  <!-- <a href="" class="card">
+                    <img src="https://play-lh.googleusercontent.com/Tl2oufSkM_vdsLRDlHsgNApfuqp08fVsQ_wxX0vh7j0MDByckCxMaQoZ5VPSiSVZOA" class="card__image" alt="" />
+                    <div class="card__overlay">
+                      <div class="card__header">
+                        <svg class="card__arc" xmlns="http://www.w3.org/2000/svg"><path /></svg>                     
+                        <img class="card__thumb" src="https://i.imgur.com/7D7I6dI.png" alt="" />
+                        <div class="card__header-text">
+                          <h3 class="card__title">Mark Attendance</h3>           
+                          <span class="card__status">1 hour ago</span>
+                        </div>
+                      </div>
+                      <p class="card__description"> Record student attendance with a click by choosing 'Mark Attendance' for an efficient tracking system</p>
+                    </div>
+                  </a> -->
+                </li>
+                <li>
+                  <!-- <a href="" class="card">
+                    <img src="https://i.imgur.com/2DhmtJ4.jpg" class="card__image" alt="" />
+                    <div class="card__overlay">
+                      <div class="card__header">
+                        <svg class="card__arc" xmlns="http://www.w3.org/2000/svg"><path /></svg>                 
+                        <img class="card__thumb" src="https://i.imgur.com/sjLMNDM.png" alt="" />
+                        <div class="card__header-text">
+                          <h3 class="card__title">kim Cattrall</h3>
+                          <span class="card__status">3 hours ago</span>
+                        </div>          
+                      </div>
+                      <p class="card__description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores, blanditiis?</p>
+                    </div>
+                  </a> -->
+                </li>    
+              </ul>
+        </div>
+    </div>
+
+    <div class="container">
+      <div class="header">
+        <h1 class="header__title" style="background-color: #80f2a630;padding: 10px;border-radius: 75px;">Batches</h1>
+      </div>
+
+      <div class='row dashboard-cards'>
+        {% for batch in batches %}
+        <div class='card col-md-4'>
+          <a href="/mark_attendance/{{batch.id}}" style="text-decoration: none;color: black;">
+            <div class='card-title'>
+              <h2>
+                {{batch.name}}
+                <small>You have {{batch.student_count}} enrolled student</small>
+              </h2>
+              <div class='task-count'>
+                {{batch.student_count}}
+              </div>
+            </div>
+          </a>
+        </div>
+        {% endfor %}
+        
+      </div>
+    </div>
+    
+
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

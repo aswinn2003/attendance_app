@@ -1,0 +1,474 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Panel</title>
+    <!-- Bootstrap CSS -->
+    <!-- Latest compiled and minified CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+      body{
+        background-image: url("{% static 'student-background.jpg' %}");
+        background-size: cover;
+      }
+      .snip1143 {
+        text-align: center;
+        text-transform: uppercase;
+        font-weight: 500;
+      }
+      .snip1143 * {
+        box-sizing: border-box;
+        -webkit-transition: all 0.35s ease;
+        transition: all 0.35s ease;
+      }
+      .snip1143 li {
+        display: inline-block;
+        list-style: outside none none;
+        margin: 0 1.5em;
+        overflow: hidden;
+      }
+      .snip1143 a {
+        padding: 0.3em 0;
+        color: rgba(255, 255, 255, 0.5);
+        position: relative;
+        display: inline-block;
+        letter-spacing: 1px;
+        margin: 0;
+        text-decoration: none;
+      }
+      .snip1143 a:before,
+      .snip1143 a:after {
+        position: absolute;
+        -webkit-transition: all 0.35s ease;
+        transition: all 0.35s ease;
+      }
+      .snip1143 a:before {
+        top: 100%;
+        display: block;
+        height: 3px;
+        width: 100%;
+        content: "";
+        background-color: #c0392b;
+      }
+      .snip1143 a:after {
+        padding: 0.3em 0;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        content: attr(data-hover);
+        color: white;
+        white-space: nowrap;
+      }
+      .snip1143 li:hover a,
+      .snip1143 .current a {
+        transform: translateY(-100%);
+      }
+
+      /* CARD */
+      :root {
+        --surface-color: #fff;
+        --curve: 40;
+        }
+
+        * {
+        box-sizing: border-box;
+        }
+
+        body {
+        font-family: 'Noto Sans JP', sans-serif;
+        background-color: #fef8f8;
+        }
+
+        .cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        margin: 4rem 5vw;
+        padding: 0;
+        list-style-type: none;
+        }
+
+        .card {
+        position: relative;
+        display: block;
+        height: 100%;  
+        border-radius: calc(var(--curve) * 1px);
+        overflow: hidden;
+        text-decoration: none;
+        }
+
+        .card__image {      
+        width: 100%;
+        height: auto;
+        }
+
+        .card__overlay {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 1;      
+        border-radius: calc(var(--curve) * 1px);    
+        background-color: var(--surface-color);      
+        transform: translateY(100%);
+        transition: .2s ease-in-out;
+        }
+
+        .card:hover .card__overlay {
+        transform: translateY(0);
+        }
+
+        .card__header {
+        position: relative;
+        display: flex;
+        align-items: center;
+        gap: 2em;
+        padding: 2em;
+        border-radius: calc(var(--curve) * 1px) 0 0 0;    
+        background-color: var(--surface-color);
+        transform: translateY(-100%);
+        transition: .2s ease-in-out;
+        }
+
+        .card__arc {
+        width: 80px;
+        height: 80px;
+        position: absolute;
+        bottom: 100%;
+        right: 0;      
+        z-index: 1;
+        }
+
+        .card__arc path {
+        fill: var(--surface-color);
+        d: path("M 40 80 c 22 0 40 -22 40 -40 v 40 Z");
+        }       
+
+        .card:hover .card__header {
+        transform: translateY(0);
+        }
+
+        .card__thumb {
+        flex-shrink: 0;
+        width: 50px;
+        height: 50px;      
+        border-radius: 50%;      
+        }
+
+        .card__title {
+        font-size: 1em;
+        margin: 0 0 .3em;
+        color: #6A515E;
+        }
+
+        .card__tagline {
+        display: block;
+        margin: 1em 0;
+        font-family: "MockFlowFont";  
+        font-size: .8em; 
+        color: #D7BDCA;  
+        }
+
+        .card__status {
+        font-size: .8em;
+        color: #D7BDCA;
+        }
+
+        .card__description {
+        padding: 0 2em 2em;
+        margin: 0;
+        color: #D7BDCA;
+        font-family: "MockFlowFont";   
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 3;
+        overflow: hidden;
+        }    
+
+        
+        /* Container */
+        .container {
+          width: 100%;
+          margin-left: auto;
+          margin-right: auto;
+          height: 100px;
+
+        }
+
+
+        /* Side Navigation Bar */
+        .sidenav {
+          height: 100%;
+          width: 30%;
+          position: fixed;
+          z-index: 1;
+          top: 0;
+          left: 0;
+          background-color: rgb(0,35,51);
+          overflow-x: hidden;
+          padding-top: 20px;
+        }
+        .sidenav h1 {
+          font-size: 28px;
+          color: #FFFFFF;
+          font-family: Bahnschrift;
+          position: absolute;
+          /*top: 30%;
+          left: 50%;*/
+          margin-top: 30%;
+          margin-left: 50%;
+          transform: translate(-50%, -50%);
+        }
+        .sidenav .line {
+          border-radius: 25px;
+          background: rgb(0,255,132);
+          padding: 6px;
+          width: 150px;
+          height: 1px;
+          position: absolute;
+          margin-top: 35%;
+          margin-left: 50%;
+          /*top: 37%;
+          left: 50%;*/
+        }
+        .sidenav p {
+          font-size: 16px;
+          color: #FFFFFF;
+          font-family: Bahnschrift;
+          position: absolute;
+          margin-top: 45%;
+          margin-left: 50%;
+          /*top: 45%;
+          left: 50%;*/
+          text-align: center;
+          transform: translate(-50%, -50%);
+        }
+        .sidenav .signupbtn {
+          position: absolute;
+          margin-top: 60%;
+          margin-left: 50%;
+          /*top: 60%;
+          left: 50%;*/
+          transform: translate(-50%, -50%);
+          font-size: 15px;
+          font-weight: 700;
+          font-family: Bahnschrift;
+          color: rgb(0,35,51);
+          border: none;
+          border-radius: 10px;
+          padding: 5px 60px;
+          cursor: pointer;
+          background-color: #FFF;
+        }
+
+        .content {
+          position: relative;
+          display: block;
+          margin-top: 30%;
+        }
+
+
+        /* Form */
+        .signupform {
+          margin-left: 30%;
+          margin-top: 120px;
+          padding: 0px 10px;
+          background-color: #ffffffc9;
+          padding: 50px;
+          border-radius: 100px;
+          box-shadow: rgb(100 102 111) 0px 7px 29px 0px;
+        }
+
+        .signupform h1 {
+          font-size: 28px;
+          color: rgb(0,35,51);
+          margin-left: 45%;
+          font-family: Bahnschrift;
+        }
+
+        .signupform input {
+          margin-bottom: 15px;
+          padding: 5px 10px;
+          width: 60%;
+          font-family: Times New Roman;
+          font-size: 18px;
+        }
+
+        .signupform button {
+          font-size: 18px;
+          font-weight: 700;
+          font-family: Bahnschrift;
+          color: rgb(0,35,51);
+          border: none;
+          border-radius: 5px;
+          padding: 8px 22px;
+          cursor: pointer;
+          width: 62%;
+          background-color: rgb(0,255,132);
+        }
+
+        .signupform button:hover {
+          color: #FFF;
+        }
+
+        .signupform hr {
+          margin-left: 1%; 
+          margin-bottom: 20px;
+        }
+
+
+        /* Modal */
+        .modal {
+          display: none;
+          position: fixed;
+          z-index: 1;
+          left: 0;
+          top: 0;
+          width: 100%;
+          height: 100%;
+          overflow: auto;
+          background-color: rgb(0,0,0);
+          background-color: rgba(0,0,0,0.4);
+        }
+
+        /* Modal Content/Box */
+        .modal-content {
+          background-color: rgb(0,35,51);
+          margin: 15% auto; 
+          padding: 20px;
+          border: 1px solid #888;
+          width: 80%; 
+          color: #FFF;
+          font-size: 21px;
+          font-weight: 700;
+          font-family: Bahnschrift;
+        }
+
+        /* The Close Button */
+        .close {
+          color: #FFF;
+          float: right;
+          font-size: 28px;
+          font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+          color: rgb(0,255,132);
+          text-decoration: none;
+          cursor: pointer;
+        }
+        .password-container {
+          position: relative;
+          display: flex;
+          
+      }
+      #togglePassword {
+          margin-top: 0%;
+          right: 5px; /* Adjust the distance from the right side */
+          border: none;
+          background: none;
+          cursor: pointer;
+          width: 1%;
+      }
+      }
+    </style>
+</head>
+<body>
+    <ul class="snip1143">
+      <li class="current"><a href="#" data-hover="Add Student">Add Student</a></li>
+      <li><a href="/teacher_panel/" data-hover="{{teacher.name}} - Panel">{{teacher.name}} - Panel</a></li>
+      <li><a href="/logout/" data-hover="Logout">Logout</a></li>
+    </ul>
+    
+    <div class="container">        
+      <div class="sidenav">
+        <div class="content">
+          <h1>Welcome!</h1><br/>
+          <p class="line"></p> <br/>
+          <p>Forgot to add parent? <br/>Add Now!</p><br/>
+          <a href="/add_parent/"><button class="signupbtn">Add Parent</button></a>
+          </div>        
+      </div>
+        
+      <div class="signupform">
+
+        <center>
+          <form method="post" action="/add_student/" onsubmit="return validateForm()">
+            {% csrf_token %}
+            <input type="text" placeholder="First Name" id="fname" name="first_name" required/><br/> 
+            <input type="text" placeholder="Last Name" id="lname" name="last_name" required/><br/> 
+            <input type="text" placeholder="Phone number" id="pno" name="phone" required/><br/>   
+            <input type="text" placeholder="Email" id="email" name="email" required/><br/>           
+            <input type="password" style="margin-left:44px;" placeholder="Password" id="pwd" name="password" required/><button type="button" id="togglePassword" aria-label="Toggle password visibility">👁️</button><br/>
+            <div>
+              <select name="parent" id="parentSelect" class="form-control" style="max-width: 60%;">
+                <option value="">Choose Parent</option>
+                {% for parent in parents %}
+                  <option value="{{parent.id}}">{{parent.first_name}} {{parent.last_name}} - {{parent.email}}</option>
+                {% endfor %}
+              </select>
+              <select name="batch" id="batchSelect" class="form-control" style="max-width: 60%; margin-top: 10px;">
+                <option value="">Choose Batch</option>
+                {% for batch in batches %}
+                  <option value="{{batch.id}}">{{batch.name}}</option>
+                {% endfor %}
+              </select>
+            </div>
+            <button id="signup" style="margin-top: 5px;">
+              <span class="signup">Register Student</span>
+            </button>
+            <p style="color:red;" id="errorMessage">{{message}}</p>
+          </form>
+      </center>        
+      </div>      
+    </div>
+        
+        
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+
+      function validateForm() {
+      var parentSelect = document.getElementById("parentSelect");
+      var batchSelect = document.getElementById("batchSelect");
+      var errorMessage = document.getElementById("errorMessage");
+
+      if (parentSelect.value === "") {
+        errorMessage.innerText = "Please select a parent.";
+        return false; // Prevent form submission
+      } 
+
+      if (batchSelect.value === "") {
+        errorMessage.innerText = "Please select a batch.";
+        return false; // Prevent form submission
+      } 
+
+      parentErrorMessage.innerText = "";
+      return true; // Allow form submission
+    }
+    </script>
+    <script>
+      const passwordInput = document.getElementById("pwd");
+      const togglePasswordButton = document.getElementById("togglePassword");
+    
+      togglePasswordButton.addEventListener("click", function() {
+          const type = passwordInput.getAttribute("type") === "password" ? "text" : "password";
+          passwordInput.setAttribute("type", type);
+          togglePasswordButton.textContent = type === "password" ? "👁️" : "👁️";
+      });
+      document.getElementById('email-sample').addEventListener('click', function() {
+        var emailInput = document.getElementById('');
+        if (!emailInput.value.endsWith('@gmail.com')) {
+            emailInput.value += '@gmail.com';
+        }
+    });
+  </script>
+
+  
+</body>
+</html>

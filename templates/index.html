@@ -1,0 +1,273 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <title>Attendance Tracker</title>
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+    <!--Stylesheet-->
+    <style media="screen">
+      *,
+*:before,
+*:after{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+body{
+    background-color: #080710;
+    background-image: url("{% static 'in.jpg' %}");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.background{
+    width: 430px;
+    height: 520px;
+    position: absolute;
+    transform: translate(-50%,-50%);
+    left: 50%;
+    top: 50%;
+}
+
+form{
+    height: 580px;
+    width: 400px;
+    background-color: rgba(255,255,255,0.13);
+    position: absolute;
+    transform: translate(-50%,-50%);
+    top: 50%;
+    left: 50%;
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255,255,255,0.1);
+    box-shadow: 0 0 40px rgba(8,7,16,0.6);
+    padding: 10px 35px;
+
+}
+form *{
+    font-family: 'Poppins',sans-serif;
+    letter-spacing: 0.5px;
+    outline: none;
+    border: none;
+}
+form h3{
+    font-size: 32px;
+    font-weight: 500;
+    line-height: 42px;
+    text-align: center;
+}
+
+label{
+    display: block;
+    margin-top: 30px;
+    font-size: 16px;
+    font-weight: 500;
+}
+input{
+    display: block;
+    height: 50px;
+    width: 100%;
+    background-color: rgba(255,255,255,0.07);
+    border-radius: 3px;
+    padding: 0 10px;
+    margin-top: 8px;
+    font-size: 14px;
+    font-weight: 300;
+    border: 1px solid darkgray;
+}
+::placeholder{
+    color: grey;
+}
+button{
+    margin-top: 50px;
+    width: 100%;
+    background-color: #ffffff;
+    color: #080710;
+    padding: 15px 0;
+    font-size: 18px;
+    font-weight: 600;
+    border-radius: 5px;
+    cursor: pointer;
+
+}
+select{
+    display: block;
+    height: 50px;
+    width: 100%;
+    background-color: rgba(255,255,255,0.07);
+    border-radius: 3px;
+    padding: 0 10px;
+    margin-top: 8px;
+    font-size: 14px;
+    font-weight: 300;
+    border: 1px solid darkgray;
+}
+
+option{
+    color: #080710;
+}
+
+.snip1143 {
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+.snip1143 * {
+  box-sizing: border-box;
+  -webkit-transition: all 0.35s ease;
+  transition: all 0.35s ease;
+}
+.snip1143 li {
+  display: inline-block;
+  list-style: outside none none;
+  margin: 0 1.5em;
+  overflow: hidden;
+}
+.snip1143 a {
+  padding: 0.3em 0;
+  color: rgba(255, 255, 255, 0.5);
+  position: relative;
+  display: inline-block;
+  letter-spacing: 1px;
+  margin: 0;
+  text-decoration: none;
+}
+.snip1143 a:before,
+.snip1143 a:after {
+  position: absolute;
+  -webkit-transition: all 0.35s ease;
+  transition: all 0.35s ease;
+}
+.snip1143 a:before {
+  top: 100%;
+  display: block;
+  height: 3px;
+  width: 100%;
+  content: "";
+  background-color: #c0392b;
+}
+.snip1143 a:after {
+  padding: 0.3em 0;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  content: attr(data-hover);
+  color: white;
+  white-space: nowrap;
+}
+.snip1143 li:hover a,
+.snip1143 .current a {
+  transform: translateY(-100%);
+}
+
+
+.password-container {
+        position: relative;
+        display: flex;
+    }
+
+
+    #togglePassword {
+        margin-top: 0%;
+        right: 5px; /* Adjust the distance from the right side */
+        border: none;
+        background: none;
+        cursor: pointer;
+        width: 1%;
+    }
+
+    .input-container {
+        position: relative;
+    }
+    
+    #username {
+        padding-right: 100px; /* Adjust padding to accommodate sample text */
+    }
+    
+    #email-sample {
+        position: absolute;
+        top: 50%;
+        right: 10px;
+        transform: translateY(-50%);
+        color: #666;
+        cursor: pointer;
+        opacity: 0.5;
+        font-size: 13px;
+    }
+    
+    #email-sample:hover {
+        text-decoration: underline;
+        opacity:1.0;
+    }
+
+    </style>
+</head>
+<body>
+    <div class="background">
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
+
+    <ul class="snip1143">
+        <!--li class="current"><a href="#" data-hover="Home">Home</a></li>-->
+        <!-- <li><a href="#" data-hover="About Us">About Us</a></li> -->
+        <!-- <li><a href="#" data-hover="Contact">Contact</a></li> -->
+      </ul>
+
+
+      <form action="/" method="post">
+        {% csrf_token %}
+        <h3>LOGIN</h3>
+
+        <label for="username">Username</label>
+        <div class="input-container">
+        <input name="email" type="text" placeholder="Email" id="username" value="{{ submitted_email }}" required>
+        <span id="email-sample">@gmail.com</span>
+    </div>
+        <p style="color:red;">{{email_error}}</p>
+
+        <label for="password">Password</label>
+        <div class="password-container">
+            <input name="password" type="password" placeholder="Password" id="password" required>
+            <button type="button" id="togglePassword" aria-label="Toggle password visibility">👁️</button>
+
+
+        </div>
+        <p style="color:red;">{{password_error}}</p>
+
+        <label for="choice">User Type</label>
+        <select name="choice" class="choice" id="choice">
+            <option {% if submitted_choice == 'Student' %} selected {% endif %}>Student</option>
+        <option {% if submitted_choice == 'Parent/Guardian' %} selected {% endif %}>Parent/Guardian</option>
+        <option {% if submitted_choice == 'Teacher' %} selected {% endif %}>Teacher</option>
+        <option {% if submitted_choice == 'Head' %} selected {% endif %}>Head</option>
+        </select>
+
+        <p style="color:red;">{{message}}</p>
+        <button>Log In</button>
+    </form>
+
+      <script>
+      const passwordInput = document.getElementById("password");
+      const togglePasswordButton = document.getElementById("togglePassword");
+
+      togglePasswordButton.addEventListener("click", function() {
+          const type = passwordInput.getAttribute("type") === "password" ? "text" : "password";
+          passwordInput.setAttribute("type", type);
+          togglePasswordButton.textContent = type === "password" ? "👁️" : "👁️";
+      });
+  </script>
+  <script>
+    document.getElementById('email-sample').addEventListener('click', function() {
+        var emailInput = document.getElementById('username');
+        if (!emailInput.value.endsWith('@gmail.com')) {
+            emailInput.value += '@gmail.com';
+        }
+    });
+</script>
+
+</body>
+</html>

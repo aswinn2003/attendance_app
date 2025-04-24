@@ -1,0 +1,227 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Head Panel</title>
+    <!-- Bootstrap CSS -->
+    <!-- Latest compiled and minified CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+      body{
+        background-image: url("{% static 'education.jpg' %}");
+        background-size: cover;
+      }
+      .snip1143 {
+        text-align: center;
+        text-transform: uppercase;
+        font-weight: 500;
+      }
+      .snip1143 * {
+        box-sizing: border-box;
+        -webkit-transition: all 0.35s ease;
+        transition: all 0.35s ease;
+      }
+      .snip1143 li {
+        display: inline-block;
+        list-style: outside none none;
+        margin: 0 1.5em;
+        overflow: hidden;
+      }
+      .snip1143 a {
+        padding: 0.3em 0;
+        color: rgba(255, 255, 255, 0.5);
+        position: relative;
+        display: inline-block;
+        letter-spacing: 1px;
+        margin: 0;
+        text-decoration: none;
+      }
+      .snip1143 a:before,
+      .snip1143 a:after {
+        position: absolute;
+        -webkit-transition: all 0.35s ease;
+        transition: all 0.35s ease;
+      }
+      .snip1143 a:before {
+        top: 100%;
+        display: block;
+        height: 3px;
+        width: 100%;
+        content: "";
+        background-color: #c0392b;
+      }
+      .snip1143 a:after {
+        padding: 0.3em 0;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        content: attr(data-hover);
+        color: white;
+        white-space: nowrap;
+      }
+      .snip1143 li:hover a,
+      .snip1143 .current a {
+        transform: translateY(-100%);
+      }
+
+ 
+.password-container {
+  position: relative;
+  display: flex;
+}
+
+
+#togglePassword {
+  margin-top: 0%;
+  right: 5px; /* Adjust the distance from the right side */
+  border: none;
+  background: none;
+  cursor: pointer;
+  width: 1%;
+}
+
+.input-container {
+  position: relative;
+}
+
+#username {
+  padding-right: 100px;
+}
+
+#email-sample {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  color: #666;
+  cursor: pointer;
+  opacity: 0.7;
+  font-size: 14px;
+}
+
+#email-sample:hover {
+  text-decoration: underline;
+  opacity:1.0;
+}
+
+    </style>
+</head>
+<body>
+    <ul class="snip1143">
+      <li class="current"><a href="#" data-hover="Head Panel">Head Panel</a></li>
+      <li><a href="/logout/" data-hover="Logout">Logout</a></li>
+      <li><a href="/head_notice/" data-hover="Notice">Notice</a></li>
+    </ul>
+    <div class="container">
+        <div class="row">
+            <!-- Add Teacher Form -->
+            <div class="col pb-4 pt-3" style = "margin-right: 1%;box-shadow:(99, 99, 99, 0.2) 0px 2px 8px 0px; border-radius:15px;background-color: azure;opacity: 0.9;">
+                <h2>Add Teacher</h2>
+                <form id="addTeacherForm" action = "/add_teacher/" method = "post">
+                  {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="teacherName" class="form-label">Name</label>
+                        <input type="text" name = "name" class="form-control" id="teacherName"required>
+                    </div>
+                    <div class="mb-3">
+                      <div class="input-container">
+                        <label for="teacherEmail" class="form-label">Email</label>
+                        <input type="email" name = "email" class="form-control" id="teacherEmail"required>
+                        <span id="email-sample"style="margin-top:12px;">@gmail.com</span>
+                      </div>
+                        <p style = "color:red;font-weight:bold;">{{message}}</p>
+                    </div>
+                    <div class="mb-3">
+                        <label for="teacherPassword" class="form-label">Password</label>
+                        <input type="password" name = "password" class="form-control" id="teacherPassword"required>
+                        <button type="button" id="togglePassword" aria-label="Toggle password visibility">👁️</button>
+                    </div>
+                    <div class="mb-3">
+                        <label for="teacherDesignation" class="form-label">Designation</label>
+                        <input type="text" name = "designation" class="form-control" id="teacherDesignation"required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="teacherSubjects" class="form-label">Subjects</label>
+                        <input type="text" name = "subjects" class="form-control" id="teacherSubjects"required>
+                    </div>
+                    <button type="submit" class="btn btn-success form-control">Add Teacher</button>
+                </form>
+            </div>
+            <!-- Create Batch Form -->
+            <div class="col pb-4 pt-3" style = "box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;border-radius:15px;background-color: azure;opacity: 0.9;">
+                <h2>Create Batch</h2>
+                <form id="createBatchForm" action = "/add_batch/" method = "post">
+                  {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="batchName" class="form-label">Batch Name</label>
+                        <input name = "name" type="text" class="form-control" id="batchName"required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="startDate" class="form-label">Start Date</label>
+                        <input name ="date" type="date" class="form-control" id="startDate"required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="batchTeacher" class="form-label">Teacher <small><i>(Choose from list)</i></small></label>
+                        <select name = "teacher" class="form-select" id="batchTeacher" required>
+                          {% for teacher in teachers %}
+                            <option value = "{{teacher.id}}">{{teacher.name}}</option>
+                          {% endfor %}
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn btn-success form-control mt-auto">Create Batch</button>
+                </form>
+            </div>
+        </div>
+        <!-- Display Teachers and Batches -->
+        <div class="row mt-4">
+            <div class="col">
+                <h3 style="background-color: #f0f0f0; padding: 10px;border-radius: 10px;">Current Teachers</h3>
+                <ul id="teachersList" class="list-group">
+                  {% for teacher in teachers %}
+                  <li class="list-group-item d-flex justify-content-between align-items-center">
+                      {{teacher.name}}
+                      <a href = "/delete_teacher/{{teacher.id}}"><button class="btn btn-danger btn-sm">Delete</button></a>
+                  </li>
+                  {% endfor %}
+              </ul>
+            </div>
+            <div class="col">
+                <h3 style="background-color: #f0f0f0; padding: 10px;border-radius: 10px;">Current Batches</h3>
+                <ul id="batchesList" class="list-group">
+                  {% for batch in batches %}
+                  <li class="list-group-item d-flex justify-content-between align-items-center">
+                      {{batch.name}} - {{batch.teacher}}
+                      <a href = "/delete_batch/{{batch.id}}"><button class="btn btn-danger btn-sm">Delete</button></a>
+                  </li>
+                  {% endfor %}
+              </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      const passwordInput = document.getElementById("teacherPassword");
+      const togglePasswordButton = document.getElementById("togglePassword");
+    
+      togglePasswordButton.addEventListener("click", function() {
+          const type = passwordInput.getAttribute("type") === "password" ? "text" : "password";
+          passwordInput.setAttribute("type", type);
+          togglePasswordButton.textContent = type === "password" ? "👁️" : "👁️";
+      });
+      document.getElementById('email-sample').addEventListener('click', function() {
+        var emailInput = document.getElementById('username');
+        if (!emailInput.value.endsWith('@gmail.com')) {
+            emailInput.value += '@gmail.com';
+        }
+    });
+      
+  </script>
+
+
+</body>
+</html>
